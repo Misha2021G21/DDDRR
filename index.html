@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDDD</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        .box {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background: rgba(255, 0, 0, 0.5);
+            animation: move 0.05s infinite linear;
+        }
+        @keyframes move {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(100vw, 100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Создание экстремально большого количества элементов на странице
+        for (let i = 0; i < 100000; i++) {
+            const div = document.createElement('div');
+            div.className = 'box';
+            div.style.top = Math.random() * 100 + 'vh';
+            div.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(div);
+        }
+
+        // Бесконечный рендер с использованием Canvas с ещё большим количеством объектов
+        const canvas = document.createElement('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < 50000; i++) {
+                ctx.fillStyle = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`;
+                ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 10, 10);
+            }
+            requestAnimationFrame(render);
+        }
+
+        render();
+    </script>
+</body>
+</html>
